@@ -1,0 +1,8 @@
+name = Webform Views Select
+description = Allows you to use a view as a data source for a webform select component
+package = Webform
+core = 7.x
+
+files[] = webform_views_select.module
+files[] = webform_views_select.views.inc
+files[] = webform_views_select_handler.inc

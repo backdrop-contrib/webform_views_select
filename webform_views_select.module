@@ -1,0 +1,42 @@
+<?php
+
+/**
+* Implements hook_views_api().
+*/
+function webform_views_select_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
+
+function webform_views_select_webform_select_options_info() {
+  $query = db_select('views_display', 'vd');
+  $query->join('views_view', 'vv', 'vd.vid = vv.vid');
+  $query->fields('vd',array('id','display_title'))
+    ->condition('display_plugin', 'webform_select','=')
+    ->fields('vv',array('name'));
+  $result = $query->execute();
+  
+  while($v = $result->fetchAssoc()) {
+    $items[$v['name'].'-'.$v['id']] = array(
+      'title' => $v['name'].'-'.$v['id'],
+      'options callback' => 'webform_views_select_options',
+      'options arguments' => array('view'=>$v),
+    );
+  }
+  return $items;
+}
+
+function webform_views_select_options($component, $flat, $filter, $args = array()) {
+  $view = views_get_view($args['view']['name']);
+  $view->set_display($args['view']['id']);
+  $view->pre_execute();
+  $view->execute();
+  $rows = array();
+ 
+  foreach ($view->result as $row) {
+    $rows[$row->nid] = $row->node_title;
+  }
+  return $rows;
+}
+?>
