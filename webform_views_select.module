@@ -1,14 +1,22 @@
 <?php
 
 /**
-* Implements hook_views_api().
-*/
+ * @file
+ * Module file for Webform Views Select.
+ */
+
+/**
+ * Implements hook_views_api().
+ */
 function webform_views_select_views_api() {
   return array(
     'api' => 3,
   );
 }
 
+/**
+ * Implements hook_webform_select_options_info().
+ */
 function webform_views_select_webform_select_options_info() {
   $views = views_get_enabled_views();
   $items = array();
@@ -17,8 +25,8 @@ function webform_views_select_webform_select_options_info() {
     if (!empty($view->display)) {
       foreach (array_keys($view->display) as $id) {
         if ($view->display[$id]->display_plugin == 'webform_select') {
-          $items[$view->name.'-'.$id] = array(
-            'title' => $view->name.'-'.$id,
+          $items[$view->name . '-' . $id] = array(
+            'title' => $view->name . '-' . $id,
             'options callback' => 'webform_views_select_options',
             'options arguments' => array('view' => $view->name, 'display_id' => $id),
           );
@@ -30,6 +38,11 @@ function webform_views_select_webform_select_options_info() {
   return $items;
 }
 
+/**
+ * Callback for retrieving webform select options.
+ *
+ * @see webform_options_example().
+ */
 function webform_views_select_options($component, $flat, $filter, $args = array()) {
   // In Webform 4.x, $filter has been removed and the value $args is really the
   // third parameter. This means that when $args is empty, we need to get the

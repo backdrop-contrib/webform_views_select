@@ -2,7 +2,7 @@
 
 /**
  * @file
- * This file contains the Style Plugin Class.
+ * Contains webform_views_select_style.
  */
 
 /**
@@ -13,7 +13,7 @@ class webform_views_select_style extends views_plugin_style_mapping {
   /**
    * Implements views_plugin_style_mapping::define_mapping().
    */
-  function define_mapping() {
+  public function define_mapping() {
     return array(
       'webform_select_key' => array(
         '#title' => t('Select Key'),
@@ -26,3 +26,4 @@ class webform_views_select_style extends views_plugin_style_mapping {
     );
   }
 }
+
