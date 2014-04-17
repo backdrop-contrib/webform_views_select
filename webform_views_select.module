@@ -41,7 +41,7 @@ function webform_views_select_webform_select_options_info() {
 /**
  * Callback for retrieving webform select options.
  *
- * @see webform_options_example().
+ * @see webform_options_example()
  */
 function webform_views_select_options($component, $flat, $filter, $args = array()) {
   // In Webform 4.x, $filter has been removed and the value $args is really the

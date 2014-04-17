@@ -40,4 +40,3 @@ function webform_views_select_views_plugins() {
     ),
   );
 }
-

@@ -17,4 +17,3 @@ class webform_views_select_handler extends views_plugin_display {
     return $this->view->render();
   }
 }
-

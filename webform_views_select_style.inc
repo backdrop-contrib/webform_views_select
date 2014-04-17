@@ -26,4 +26,3 @@ class webform_views_select_style extends views_plugin_style_mapping {
     );
   }
 }
-
