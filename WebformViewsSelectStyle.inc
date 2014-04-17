@@ -8,7 +8,7 @@
 /**
  * The style plugin for Webform Views Select
  */
-class webform_views_select_style extends views_plugin_style_mapping {
+class WebformViewsSelectStyle extends views_plugin_style_mapping {
 
   /**
    * Implements views_plugin_style_mapping::define_mapping().

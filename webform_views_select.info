@@ -3,5 +3,5 @@ description = Allows you to use a view as a data source for a webform select com
 package = Webform
 core = 7.x
 
-files[] = webform_views_select_style.inc
-files[] = webform_views_select_handler.inc
+files[] = WebformViewsSelectStyle.inc
+files[] = WebformViewsSelectHandler.inc

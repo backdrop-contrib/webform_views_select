@@ -14,7 +14,7 @@ function webform_views_select_views_plugins() {
       'webform_select' => array(
         'title' => t('Webform Options'),
         'help' => t("Create a list of options for a webform select component."),
-        'handler' => 'webform_views_select_handler',
+        'handler' => 'WebformViewsSelectHandler',
         'theme' => 'views_view',
         'uses hook entity view' => TRUE,
         'use ajax' => FALSE,
@@ -28,7 +28,7 @@ function webform_views_select_views_plugins() {
       'webform_views_select_style' => array(
         'title' => t('Webform Select List'),
         'help' => t('A predefined select list option set.'),
-        'handler' => 'webform_views_select_style',
+        'handler' => 'WebformViewsSelectStyle',
         'uses row plugin' => FALSE,
         'uses fields' => TRUE,
         'uses row class' => FALSE,
