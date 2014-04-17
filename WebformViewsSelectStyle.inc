@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains webform_views_select_style.
+ * Contains WebformViewsSelectStyle.
  */
 
 /**
