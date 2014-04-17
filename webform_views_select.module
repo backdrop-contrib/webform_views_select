@@ -31,14 +31,38 @@ function webform_views_select_webform_select_options_info() {
 }
 
 function webform_views_select_options($component, $flat, $filter, $args = array()) {
+  // Get the view and execute it.
   $view = views_get_view($args['view']);
   $view->set_display($args['display_id']);
   $view->pre_execute();
   $view->execute();
-  $rows = array();
 
-  foreach ($view->result as $row) {
-    $rows[$row->nid] = $row->node_title;
+  // If we're using the new display plugin, get the field names from its
+  // options, otherwise use the nid / node_title combination for backward
+  // compatibility.
+  if ($view->style_plugin->plugin_name == 'webform_views_select_style') {
+    // Render the fields.
+    $results = array();
+    if (!empty($view->result) || $view->style_plugin->even_empty()) {
+      $results = $view->style_plugin->render_fields($view->result);
+    }
+
+    $key = $view->style_options['mapping']['webform_select_key'];
+    $value = $view->style_options['mapping']['webform_select_value'];
+  }
+  else {
+    $results = $view->result;
+    $key = 'nid';
+    $value = 'node_title';
+  }
+
+  $rows = array();
+  foreach ($results as $result) {
+    // We strip HTML tags from the field output because some fields (e.g. Date
+    // fields) include tags in their output.
+    $rendered_key = htmlspecialchars_decode(strip_tags($result[$key]), ENT_QUOTES);
+    $rendered_value = htmlspecialchars_decode(strip_tags($result[$value]), ENT_QUOTES);
+    $rows[$rendered_key] = $rendered_value;
   }
 
   return $rows;

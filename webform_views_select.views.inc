@@ -1,7 +1,13 @@
 <?php
+
 /**
-* Implements hook_views_plugins().
-*/
+ * @file
+ * This file provides Views hooks implementations.
+ */
+
+/**
+ * Implements hook_views_plugins().
+ */
 function webform_views_select_views_plugins() {
   return array(
     'display' => array(
@@ -16,6 +22,20 @@ function webform_views_select_views_plugins() {
         'use more' => FALSE,
         'accept attachments' => FALSE,
         'admin' => t('Webform Options'),
+      ),
+    ),
+    'style' => array(
+      'webform_views_select_style' => array(
+        'title' => t('Webform Select List'),
+        'help' => t('A predefined select list option set.'),
+        'handler' => 'webform_views_select_style',
+        'uses row plugin' => FALSE,
+        'uses fields' => TRUE,
+        'uses row class' => FALSE,
+        'uses grouping' => FALSE,
+        'uses options' => TRUE,
+        'even empty' => TRUE,
+        'type' => 'normal',
       ),
     ),
   );
