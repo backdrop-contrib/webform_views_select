@@ -65,6 +65,7 @@ function webform_views_select_options($component, $flat, $filter, $args = array(
 
   $rows = array();
   foreach ($results as $result) {
+    $result = (array) $result;
     // We strip HTML tags from the field output because some fields (e.g. Date
     // fields) include tags in their output.
     $rendered_key = htmlspecialchars_decode(strip_tags($result[$key]), ENT_QUOTES);
