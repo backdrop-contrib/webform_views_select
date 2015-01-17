@@ -2,6 +2,7 @@ name = Webform Views Select
 description = Allows you to use a view as a data source for a webform select component
 package = Webform
 core = 7.x
-
+dependencies[] = views
+dependencies[] = webform
 files[] = WebformViewsSelectStyle.inc
 files[] = WebformViewsSelectHandler.inc
