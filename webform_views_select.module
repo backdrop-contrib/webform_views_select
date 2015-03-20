@@ -67,8 +67,8 @@ function webform_views_select_options($component, $flat, $filter, $args = array(
       $results = $view->style_plugin->render_fields($view->result);
     }
 
-    $key = $view->style_options['mapping']['webform_select_key'];
-    $value = $view->style_options['mapping']['webform_select_value'];
+    $key = $view->style_plugin->options['mapping']['webform_select_key'];
+    $value = $view->style_plugin->options['mapping']['webform_select_value'];
   }
   else {
     $results = $view->result;

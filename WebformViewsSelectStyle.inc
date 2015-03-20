@@ -6,7 +6,7 @@
  */
 
 /**
- * The style plugin for Webform Views Select
+ * The style plugin for Webform Views Select.
  */
 class WebformViewsSelectStyle extends views_plugin_style_mapping {
 

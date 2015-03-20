@@ -13,7 +13,7 @@ view.
 
 ## Using the View
 Add the select component to your webform and pick your view under "Load a 
-Pre-Built Option List"
+Pre-Built Option List".
 
 # Caveat
 Please keep in mind that the list that will loaded on demand from the view is

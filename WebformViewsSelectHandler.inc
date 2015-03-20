@@ -6,7 +6,7 @@
  */
 
 /**
- * The plugin that handles webform_views_select_handler
+ * The plugin that handles webform_views_select_handler.
  */
 class WebformViewsSelectHandler extends views_plugin_display {
 
