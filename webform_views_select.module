@@ -54,6 +54,14 @@ function webform_views_select_options($component, $flat, $filter, $args = array(
   // Get the view and execute it.
   $view = views_get_view($args['view']);
   $view->set_display($args['display_id']);
+
+  return webform_views_select_options_from_view($view);
+}
+
+/**
+ * Internal function to get the results
+ */
+function webform_views_select_options_from_view($view) {
   $view->pre_execute();
   $view->execute();
 
