@@ -63,7 +63,7 @@ function webform_views_select_options($component, $flat, $filter, $args = array(
  */
 function webform_views_select_options_from_view($view) {
   $view->pre_execute();
-  $view->execute();
+  $view->render();
 
   // If we're using the new display plugin, get the field names from its
   // options, otherwise use the nid / node_title combination for backward
