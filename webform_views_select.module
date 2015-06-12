@@ -68,7 +68,7 @@ function webform_views_select_options_from_view($view) {
   // If we're using the new display plugin, get the field names from its
   // options, otherwise use the nid / node_title combination for backward
   // compatibility.
-  if ($view->style_plugin->plugin_name == 'webform_views_select_style') {
+  if ($view->display_handler->get_option('style_plugin') == 'webform_views_select_style') {
     // Render the fields.
     $results = array();
     if (!empty($view->result) || $view->style_plugin->even_empty()) {
