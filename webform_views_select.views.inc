@@ -32,7 +32,7 @@ function webform_views_select_views_plugins() {
         'uses row plugin' => FALSE,
         'uses fields' => TRUE,
         'uses row class' => FALSE,
-        'uses grouping' => FALSE,
+        'uses grouping' => TRUE,
         'uses options' => TRUE,
         'even empty' => TRUE,
         'type' => 'normal',

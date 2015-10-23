@@ -38,4 +38,32 @@ class WebformViewsSelectStyle extends views_plugin_style_mapping {
     }
     return $errors;
   }
+
+  /**
+   * Implements views_plugin_style::render_grouping_sets().
+   */
+  public function render_grouping_sets($sets, $level = 0) {
+    $key = $this->options['mapping']['webform_select_key'];
+    $value = $this->options['mapping']['webform_select_value'];
+
+    $output = array();
+    foreach ($sets as $set) {
+      // Render as a grouping set.
+      if (is_array($set) && isset($set['group'])) {
+        $row = reset($set['rows']);
+        $output[htmlspecialchars_decode(strip_tags($set['group']))] = $this->render_grouping_sets($set['rows'], $level + 1);
+      }
+      // Render as a record set.
+      else {
+        $result = (array) $set;
+        // We strip HTML tags from the field output because some fields (e.g.
+        // Date fields) include tags in their output.
+        $rendered_key = htmlspecialchars_decode(strip_tags($result[$key]), ENT_QUOTES);
+        $rendered_value = htmlspecialchars_decode(strip_tags($result[$value]), ENT_QUOTES);
+        $output[$rendered_key] = $rendered_value;
+      }
+    }
+
+    return $output;
+  }
 }

@@ -70,9 +70,9 @@ function webform_views_select_options_from_view($view) {
   $view->pre_execute();
   $view->render();
 
-  // If we're using the new display plugin, get the field names from its
-  // options, otherwise use the nid / node_title combination for backward
-  // compatibility.
+  // If we're using the new display plugin, get the field names and grouping
+  // info from its options, otherwise use the nid / node_title combination for
+  // backward compatibility.
   if ($view->display_handler->get_option('style_plugin') == 'webform_views_select_style') {
     // Render the fields.
     $results = array();
@@ -80,23 +80,28 @@ function webform_views_select_options_from_view($view) {
       $results = $view->style_plugin->render_fields($view->result);
     }
 
-    $key = $view->style_plugin->options['mapping']['webform_select_key'];
-    $value = $view->style_plugin->options['mapping']['webform_select_value'];
+    $grouping_options = $view->style_options['grouping'];
+    // Group the rows according to the grouping instructions, if specified.
+    $sets = $view->style_plugin->render_grouping($results, $grouping_options, TRUE);
+    $rows = $view->style_plugin->render_grouping_sets($sets);
+    if (empty($grouping_options)) {
+      $rows = $rows[''];
+    }
   }
   else {
     $results = $view->result;
     $key = 'nid';
     $value = 'node_title';
-  }
 
-  $rows = array();
-  foreach ($results as $result) {
-    $result = (array) $result;
-    // We strip HTML tags from the field output because some fields (e.g. Date
-    // fields) include tags in their output.
-    $rendered_key = htmlspecialchars_decode(strip_tags($result[$key]), ENT_QUOTES);
-    $rendered_value = htmlspecialchars_decode(strip_tags($result[$value]), ENT_QUOTES);
-    $rows[$rendered_key] = $rendered_value;
+    $rows = array();
+    foreach ($results as $result) {
+      $result = (array) $result;
+      // We strip HTML tags from the field output because some fields (e.g. Date
+      // fields) include tags in their output.
+      $rendered_key = htmlspecialchars_decode(strip_tags($result[$key]), ENT_QUOTES);
+      $rendered_value = htmlspecialchars_decode(strip_tags($result[$value]), ENT_QUOTES);
+      $rows[$rendered_key] = $rendered_value;
+    }
   }
 
   return $rows;
