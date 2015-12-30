@@ -24,4 +24,12 @@ class WebformViewsSelectHandler extends views_plugin_display {
     $rows = webform_views_select_options_from_view($this->view);
     return theme('select', array('element' => array('#options' => $rows)));
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function theme_functions() {
+    // Explicitly return an empty array to prevent loops.
+    return array();
+  }
 }
