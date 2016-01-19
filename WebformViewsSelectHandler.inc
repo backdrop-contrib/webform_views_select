@@ -29,7 +29,7 @@ class WebformViewsSelectHandler extends views_plugin_display {
    * {@inheritdoc}
    */
   public function theme_functions() {
-    // Explicitly return an empty array to prevent loops.
-    return array();
+    // Explicitly return an empty string to prevent loops.
+    return array('');
   }
 }
