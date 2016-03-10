@@ -16,7 +16,6 @@ function webform_views_select_views_plugins() {
         'help' => t("Create a list of options for a webform select component."),
         'handler' => 'WebformViewsSelectHandler',
         'theme' => 'views_view',
-        'uses hook entity view' => TRUE,
         'use ajax' => FALSE,
         'use pager' => FALSE,
         'use more' => FALSE,
