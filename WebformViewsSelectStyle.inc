@@ -27,6 +27,57 @@ class WebformViewsSelectStyle extends views_plugin_style_mapping {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function option_definition() {
+    $options = parent::option_definition();
+
+    $options['html'] = array(
+      'contains' => array(
+        'strip' => array(
+          'default' => TRUE,
+          'bool' => TRUE,
+        ),
+        'tags_allowed' => array(
+          'default' => 'a em strong cite blockquote code ul ol li dl dt dd',
+        ),
+      ),
+    );
+
+    return $options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function options_form(&$form, &$form_state) {
+    parent::options_form($form, $form_state);
+
+    $form['html'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('HTML options'),
+    );
+
+    $form['html']['strip'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Remove all HTML tags'),
+      '#default_value' => $this->options['html']['strip'],
+    );
+
+    $form['html']['tags_allowed'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Allowed tags'),
+      '#default_value' => $this->options['html']['tags_allowed'],
+      '#description' => t('The list of HTML tags that are allowed, separated by spaces.'),
+      '#states' => array(
+        'enabled' => array(
+          ':input[name="style_options[html][strip]"]' => array('checked' => FALSE),
+        ),
+      ),
+    );
+  }
+
+  /**
    * Implements views_plugin_style::validate().
    */
   public function validate() {
@@ -59,7 +110,13 @@ class WebformViewsSelectStyle extends views_plugin_style_mapping {
         // We strip HTML tags from the field output because some fields (e.g.
         // Date fields) include tags in their output.
         $rendered_key = htmlspecialchars_decode(strip_tags($result[$key]), ENT_QUOTES);
-        $rendered_value = htmlspecialchars_decode(strip_tags($result[$value]), ENT_QUOTES);
+        if ($this->options['html']['strip'] === FALSE) {
+          $rendered_value = filter_xss($result[$value], $this->options['html']['tags_allowed']);
+        }
+        else {
+          $rendered_value = htmlspecialchars_decode(strip_tags($result[$value]), ENT_QUOTES);
+        }
+
         $output[$rendered_key] = $rendered_value;
       }
     }
