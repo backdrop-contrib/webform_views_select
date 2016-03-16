@@ -60,13 +60,13 @@ function webform_views_select_options($component, $flat, $filter, $args = array(
   $view = views_get_view($args['view']);
   $view->set_display($args['display_id']);
 
-  return webform_views_select_options_from_view($view);
+  return webform_views_select_options_from_view($view, $flat);
 }
 
 /**
  * Internal function to get the results
  */
-function webform_views_select_options_from_view($view) {
+function webform_views_select_options_from_view($view, $flat = FALSE) {
   $view->pre_execute();
   $view->render();
 
@@ -80,7 +80,14 @@ function webform_views_select_options_from_view($view) {
       $results = $view->style_plugin->render_fields($view->result);
     }
 
-    $grouping_options = $view->style_options['grouping'];
+    // Do not group if a flat list is requested.
+    if ($flat) {
+      $grouping_options = array();
+    }
+    else {
+      $grouping_options = $view->style_options['grouping'];
+    }
+
     // Group the rows according to the grouping instructions, if specified.
     $sets = $view->style_plugin->render_grouping($results, $grouping_options, TRUE);
     $rows = $view->style_plugin->render_grouping_sets($sets);
