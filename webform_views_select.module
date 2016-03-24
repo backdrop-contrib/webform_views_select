@@ -70,6 +70,12 @@ function webform_views_select_options_from_view($view, $flat = FALSE) {
   $view->pre_execute();
   $view->render();
 
+  // Check if the view was built correctly.
+  if (! $view->built) {
+    watchdog('webform_views_select', 'There was an error while building display %display of view %view', array('%view' => $view->name, '%display' => $view->current_display), WATCHDOG_ERROR);
+    return array();
+  }
+
   // If we're using the new display plugin, get the field names and grouping
   // info from its options, otherwise use the nid / node_title combination for
   // backward compatibility.
