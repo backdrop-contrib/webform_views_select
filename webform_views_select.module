@@ -119,3 +119,52 @@ function webform_views_select_options_from_view($view, $flat = FALSE) {
 
   return $rows;
 }
+
+function webform_views_select_requirements($phase) {
+  $requirements = array();
+  $oldstyles = array();
+
+  // Ensure translations don't break during installation.
+  $t = get_t();
+
+  if ($phase == 'runtime' || $phase == 'update') {
+    foreach (views_get_all_views() as $view) {
+      foreach ($view->display as $display) {
+        if ($display->display_plugin == 'webform_select') {
+          if (isset($display->display_options['style_plugin'])) {
+            $style = $display->display_options['style_plugin'];
+          }
+          else {
+            $style = $view->display['default']->display_options['style_plugin'];
+          }
+          if ($style != 'webform_views_select_style') {
+            $oldstyles[] = array('display' => $display, 'view' => $view);
+          }
+        }
+      }
+    }
+  }
+
+  if (count($oldstyles) == 0) {
+    $requirements['webform_views_select'] = array(
+      'title' => 'Webform Views Select',
+      'severity' => REQUIREMENT_OK,
+      'value' => $t('All <em>Webform Select</em> displays make use of the <em>Webform Select List</em> format.'),
+    );
+  } else {
+    $descriptions = array();
+    foreach ($oldstyles as $oldstyle) {
+      $descriptions[] = l(check_plain($oldstyle['view']->human_name . ': ' . $oldstyle['display']->display_title), 'admin/structure/views/view/' . check_plain($oldstyle['view']->name) . '/edit/' . check_plain($oldstyle['display']->id));
+    }
+    $description = implode(', ', $descriptions);
+
+    $requirements['webform_views_select'] = array(
+      'title' => 'Webform Views Select',
+      'severity' => REQUIREMENT_WARNING,
+      'value' => $t('Some <em>Webform Select</em> displays are not using the <em>Webform Select List</em> format. This method is deprecated and will not work in the final release.'),
+      'description' => $description,
+    );
+  }
+
+  return $requirements;
+}
