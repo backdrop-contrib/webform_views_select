@@ -32,4 +32,19 @@ class WebformViewsSelectHandler extends views_plugin_display {
     // Explicitly return an empty string to prevent loops.
     return array('');
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  function get_style_type() {
+    return 'webform_views_select';
+  }
+
+  function option_definition() {
+    $options = parent::option_definition();
+
+    $options['style_plugin']['default'] = 'webform_views_select_style';
+    $options['defaults']['default']['style_plugin'] = FALSE;
+    return $options;
+  }
 }

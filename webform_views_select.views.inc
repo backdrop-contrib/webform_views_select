@@ -34,7 +34,7 @@ function webform_views_select_views_plugins() {
         'uses grouping' => TRUE,
         'uses options' => TRUE,
         'even empty' => TRUE,
-        'type' => 'normal',
+        'type' => 'webform_views_select',
         'theme' => NULL,
       ),
     ),
