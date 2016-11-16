@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @file
+ * Contains WebformViewsSelectViewEnabledTestCase
+ */
+
+
 class WebformViewsSelectViewEnabledTestCase extends DrupalWebTestCase {
   public static function getInfo() {
     return array(

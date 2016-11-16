@@ -27,7 +27,8 @@ function webform_views_select_webform_select_options_info() {
         if ($view->display[$id]->display_plugin == 'webform_select') {
           if (!empty($view->human_name)) {
             $viewname = $view->human_name;
-          } else {
+          }
+          else {
             $viewname = $view->name;
           }
           $items[$view->name . '-' . $id] = array(
