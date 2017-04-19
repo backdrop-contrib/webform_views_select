@@ -10,6 +10,6 @@
  */
 function webform_views_select_test_view_views_api() {
   return array(
-      'version' => '3.0',
+    'version' => '3.0',
   );
 }

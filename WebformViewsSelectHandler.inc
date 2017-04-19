@@ -36,15 +36,19 @@ class WebformViewsSelectHandler extends views_plugin_display {
   /**
    * {@inheritdoc}
    */
-  function get_style_type() {
+  public function get_style_type() {
     return 'webform_views_select';
   }
 
-  function option_definition() {
+  /**
+   * {@inheritdoc}
+   */
+  public function option_definition() {
     $options = parent::option_definition();
 
     $options['style_plugin']['default'] = 'webform_views_select_style';
     $options['defaults']['default']['style_plugin'] = FALSE;
     return $options;
   }
+
 }

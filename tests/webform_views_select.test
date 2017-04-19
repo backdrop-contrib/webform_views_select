@@ -2,11 +2,14 @@
 
 /**
  * @file
- * Contains WebformViewsSelectViewEnabledTestCase
+ * Contains WebformViewsSelectViewEnabledTestCase.
  */
 
-
+/**
+ * Test that a view only appears in the webform select list if it is enabled.
+ */
 class WebformViewsSelectViewEnabledTestCase extends DrupalWebTestCase {
+
   public static function getInfo() {
     return array(
       'name' => 'Enabled View test',
@@ -21,11 +24,11 @@ class WebformViewsSelectViewEnabledTestCase extends DrupalWebTestCase {
   }
 
   public function testDisabledView() {
-    // Disable the view
+    // Disable the view:
     $view = views_get_view('webform_views_select_test_view');
     ctools_export_crud_disable('views_view', $view);
 
-    // Clear cache
+    // Clear cache:
     ctools_export_load_object_reset('views_view');
 
     $items = webform_views_select_webform_select_options_info();
@@ -36,4 +39,5 @@ class WebformViewsSelectViewEnabledTestCase extends DrupalWebTestCase {
     $items = webform_views_select_webform_select_options_info();
     $this->assertTrue(isset($items['webform_views_select_test_view-webform_select_1']), 'Enabled view is listed in the select options info.');
   }
+
 }

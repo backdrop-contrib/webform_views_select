@@ -110,4 +110,5 @@ class WebformViewsSelectStyle extends views_plugin_style_mapping {
 
     return $output;
   }
+
 }

@@ -65,14 +65,14 @@ function webform_views_select_options($component, $flat, $filter, $args = array(
 }
 
 /**
- * Internal function to get the results
+ * Internal function to get the results.
  */
 function webform_views_select_options_from_view($view, $flat = FALSE) {
   $view->pre_execute();
   $view->render();
 
   // Check if the view was built correctly.
-  if (! $view->built) {
+  if (!$view->built) {
     watchdog('webform_views_select', 'There was an error while building display %display of view %view', array('%view' => $view->name, '%display' => $view->current_display), WATCHDOG_ERROR);
     return array();
   }
