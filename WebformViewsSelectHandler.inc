@@ -15,7 +15,7 @@ class WebformViewsSelectHandler extends views_plugin_display {
    */
   public function render() {
     $options = $this->execute();
-    return  theme('select', array('element' => array('#options' => $options)));
+    return theme('select', array('element' => array('#options' => $options)));
   }
 
   /**
@@ -63,4 +63,5 @@ class WebformViewsSelectHandler extends views_plugin_display {
 
     return $rows;
   }
+
 }
