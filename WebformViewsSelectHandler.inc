@@ -13,24 +13,9 @@ class WebformViewsSelectHandler extends views_plugin_display {
   /**
    * {@inheritdoc}
    */
-  public function execute() {
-    return $this->view->render();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function preview() {
-    $rows = webform_views_select_options_from_view($this->view);
-    return theme('select', array('element' => array('#options' => $rows)));
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function theme_functions() {
-    // Explicitly return an empty string to prevent loops.
-    return array('');
+  public function render() {
+    $options = $this->execute();
+    return  theme('select', array('element' => array('#options' => $options)));
   }
 
   /**
@@ -51,4 +36,31 @@ class WebformViewsSelectHandler extends views_plugin_display {
     return $options;
   }
 
+  /**
+   * Returns the list of select options in the format required by Webform.
+   */
+  public function execute($flat = FALSE) {
+    // Render the fields.
+    $results = array();
+    if (!empty($this->view->result) || $this->view->style_plugin->even_empty()) {
+      $results = $this->view->style_plugin->render_fields($this->view->result);
+    }
+
+    // Do not group if a flat list is requested.
+    if ($flat) {
+      $grouping_options = array();
+    }
+    else {
+      $grouping_options = $this->view->style_options['grouping'];
+    }
+
+    // Group the rows according to the grouping instructions, if specified.
+    $sets = $this->view->style_plugin->render_grouping($results, $grouping_options, TRUE);
+    $rows = $this->view->style_plugin->render_grouping_sets($sets);
+    if (empty($grouping_options)) {
+      $rows = $rows[''];
+    }
+
+    return $rows;
+  }
 }

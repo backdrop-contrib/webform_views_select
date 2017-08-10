@@ -77,26 +77,5 @@ function webform_views_select_options_from_view($view, $flat = FALSE) {
     return array();
   }
 
-  // Render the fields.
-  $results = array();
-  if (!empty($view->result) || $view->style_plugin->even_empty()) {
-    $results = $view->style_plugin->render_fields($view->result);
-  }
-
-  // Do not group if a flat list is requested.
-  if ($flat) {
-    $grouping_options = array();
-  }
-  else {
-    $grouping_options = $view->style_options['grouping'];
-  }
-
-  // Group the rows according to the grouping instructions, if specified.
-  $sets = $view->style_plugin->render_grouping($results, $grouping_options, TRUE);
-  $rows = $view->style_plugin->render_grouping_sets($sets);
-  if (empty($grouping_options)) {
-    $rows = $rows[''];
-  }
-
-  return $rows;
+  return $view->display_handler->execute($flat);
 }
