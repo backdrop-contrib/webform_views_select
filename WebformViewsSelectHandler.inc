@@ -51,7 +51,13 @@ class WebformViewsSelectHandler extends views_plugin_display {
       $grouping_options = array();
     }
     else {
-      $grouping_options = $this->view->style_options['grouping'];
+      // Check if there are grouping options set.
+      if (isset($this->view->style_options['grouping'])) {
+        $grouping_options = $this->view->style_options['grouping'];
+      }
+      else {
+        $grouping_options = array();
+      }
     }
 
     // Group the rows according to the grouping instructions, if specified.
