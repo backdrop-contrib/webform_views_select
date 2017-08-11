@@ -98,7 +98,8 @@ class WebformViewsSelectStyle extends views_plugin_style_mapping {
         // Date fields) include tags in their output.
         $rendered_key = htmlspecialchars_decode(strip_tags($result[$key]), ENT_QUOTES);
         if ($this->options['html']['strip'] === FALSE) {
-          $rendered_value = filter_xss($result[$value], $this->options['html']['tags_allowed']);
+          $tags_allowed = explde(' ', $this->options['html']['tags_allowed']);
+          $rendered_value = filter_xss($result[$value], $tags_allowed);
         }
         else {
           $rendered_value = htmlspecialchars_decode(strip_tags($result[$value]), ENT_QUOTES);
