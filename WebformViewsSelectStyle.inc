@@ -88,7 +88,7 @@ class WebformViewsSelectStyle extends views_plugin_style_mapping {
     foreach ($sets as $set) {
       // Render as a grouping set.
       if (is_array($set) && isset($set['group'])) {
-        $row = reset($set['rows']);
+        reset($set['rows']);
         $output[htmlspecialchars_decode(strip_tags($set['group']))] = $this->render_grouping_sets($set['rows'], $level + 1);
       }
       // Render as a record set.
