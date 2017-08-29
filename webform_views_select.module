@@ -32,7 +32,7 @@ function webform_views_select_webform_select_options_info() {
             $viewname = $view->name;
           }
           $items[$view->name . '-' . $id] = array(
-            'title' => t('Views') . ': ' . $viewname . ' - ' . $display->display_title,
+            'title' => t('Views: @view - @display', array('@view' => $viewname, '@display' => $display->display_title)),
             'options callback' => 'webform_views_select_options',
             'options arguments' => array('view' => $view->name, 'display_id' => $id),
           );
