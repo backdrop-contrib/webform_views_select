@@ -69,24 +69,6 @@ function webform_views_select_test_view_views_default_views() {
   /* Display: Webform Options */
   $handler = $view->new_display('webform_select', 'Webform Options', 'webform_select_1');
   $handler->display->display_options['pager']['type'] = 'some';
-  $translatables['webform_views_select_test_view'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('Nid'),
-    t('Webform Options'),
-  );
   $views['webform_views_select_test_view'] = $view;
 
   return $views;
