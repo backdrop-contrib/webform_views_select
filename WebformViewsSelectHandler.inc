@@ -45,6 +45,10 @@ class WebformViewsSelectHandler extends views_plugin_display {
     if (!empty($this->view->result) || $this->view->style_plugin->even_empty()) {
       $results = $this->view->style_plugin->render_fields($this->view->result);
     }
+    else {
+      // There are no results. Stop processing here.
+      return array();
+    }
 
     // Do not group if a flat list is requested.
     if ($flat) {
@@ -63,7 +67,7 @@ class WebformViewsSelectHandler extends views_plugin_display {
     // Group the rows according to the grouping instructions, if specified.
     $sets = $this->view->style_plugin->render_grouping($results, $grouping_options, TRUE);
     $rows = $this->view->style_plugin->render_grouping_sets($sets);
-    if (empty($grouping_options)) {
+    if (empty($grouping_options) && !empty($rows)) {
       $rows = $rows[''];
     }
 
