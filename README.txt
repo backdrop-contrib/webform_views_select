@@ -1,31 +1,62 @@
-# Description
+INTRODUCTION
+------------
+
 This module will let you populate a webform select component with data from a
 view. 
 
-# Usage
-## Creating the View
-- Create a new view
-- Create a "Webform Options" display
-- Select the Webform Select List format
-- Add the fields you want to use as key and value
-- Filter and sort as needed
-- In the format settings, select the field to use as key and value.
 
-## Using the View
-Add the select component to your webform and pick your view under "Load a 
-Pre-Built Option List".
+REQUIREMENTS
+------------
 
-# Caveat
-Please keep in mind that the list that will loaded on demand from the view is
-not a hard coded list. When the webform is viewed, the component will get its
-data directly from the view.
+This module requires the following modules:
 
-Also note that you can no longer see the item in the webform results when the
-item is removed from the View results.
+ * Webform (https://www.drupal.org/project/webform)
+ * Views (https://www.drupal.org/project/views)
 
-# Using view arguments in a multi-part webform
-Using a hook_form_alter, it is possible to change the option list to make use
-of view arguments. Here's an example on how to do that (thanks jonny5th!):
+
+INSTALLATION
+------------
+
+Install as you would normally install a contributed Drupal module. Visit:
+https://drupal.org/documentation/install/modules-themes/modules-7 
+for further information.
+
+
+CONFIGURATION
+-------------
+
+The module has no menu or modifiable settings. There is no configuration.
+
+Don't disable this module if there are webforms that use a select list from
+this module, since it will break those webforms.
+
+
+TROUBLESHOOTING
+---------------
+
+ * Creating the View
+  - Create a new view
+  - Create a "Webform Options" display
+  - Select the Webform Select List format
+  - Add the fields you want to use as key and value
+  - Filter and sort as needed
+  - In the format settings, select the field to use as key and value.
+
+ * Using the View
+  Add the select component to your webform and pick your view under "Load a 
+  Pre-Built Option List".
+
+ * Caveat
+  Please keep in mind that the list that will loaded on demand from the view is
+  not a hard coded list. When the webform is viewed, the component will get its
+  data directly from the view.
+
+  Also note that you can no longer see the item in the webform results when the
+  item is removed from the View results.
+
+ * Using view arguments in a multi-part webform
+  Using a hook_form_alter, it is possible to change the option list to make use
+  of view arguments. Here's an example on how to do that (thanks jonny5th!):
 
 // Form alter to select options from views based on input
 function MYMODULE_form_alter(&$form, &$form_state, $form_id) {
