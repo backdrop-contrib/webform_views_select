@@ -85,3 +85,14 @@ function webform_views_select_options_from_view($view, $flat = FALSE) {
 
   return $view->display_handler->execute($flat);
 }
+
+/**
+ * Implements hook_help().
+ */
+function webform_views_select_help($path, $arg) {
+  switch ($path) {
+    // Main module help for this module:
+    case 'admin/help#webform_views_select':
+      return '<p>' . t('Instructions on how to use this module are provided in the README.txt file included with the module.') . '</p>';
+  }
+}
