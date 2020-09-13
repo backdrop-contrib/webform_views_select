@@ -1,9 +1,18 @@
 <?php
-
 /**
  * @file
  * Module file for Webform Views Select.
  */
+
+/**
+ * Implements hook_webform_select_options_info().
+ */
+function webform_views_select_autoload_info() {
+  return array(
+    'WebformViewsSelectStyle' => 'views/WebformViewsSelectStyle.inc',
+    'WebformViewsSelectHandler' => 'views/WebformViewsSelectHandler.inc',
+  );
+}
 
 /**
  * Implements hook_views_api().
