@@ -1,7 +1,8 @@
+type = module
 name = Webform Views Select Test View
 description = This module provides a view to test the Webform Views Select module
 package = Webform
-core = 7.x
+backdrop = 1.x
 dependencies[] = views
 dependencies[] = webform
 dependencies[] = webform_views_select

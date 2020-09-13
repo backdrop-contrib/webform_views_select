@@ -17,26 +17,23 @@ class WebformViewsSelectViewEnabledTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Test that a disabled view is not listed as an options source.
-   */
-  public function testDisabledView() {
-    // Disable the view:
-    $view = views_get_view('webform_views_select_test_view');
-    ctools_export_crud_disable('views_view', $view);
-
-    // Clear cache:
-    ctools_export_load_object_reset('views_view');
-
-    $items = webform_views_select_webform_select_options_info();
-    $this->assertFalse(isset($items['webform_views_select_test_view-webform_select_1']), 'Disabled view is not listed in the select options info.');
-  }
-
-  /**
    * Test that a enabled view is listed as an options source.
    */
   public function testEnabledView() {
     $items = webform_views_select_webform_select_options_info();
-    $this->assertTrue(isset($items['webform_views_select_test_view-webform_select_1']), 'Enabled view is listed in the select options info.');
+    $message = 'Enabled view is listed in the select options info.';
+    $this->assertTrue(isset($items['webform_views_select_test_view-webform_select_1']), $message);
   }
 
+  /**
+   * Test that a disabled view is not listed as an options source.
+   */
+  public function testDisabledView() {
+    // Disable the view.
+    config_set('views.view.webform_views_select_test_view', 'disabled', array(FALSE));
+
+    $items = webform_views_select_webform_select_options_info();
+    $message = 'Disabled view is not listed in the select options info.';
+    $this->assertFalse(isset($items['webform_views_select_test_view-webform_select_1']), $message);
+  }
 }
