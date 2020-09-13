@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Contains WebformViewsSelectViewEnabledTestCase.
@@ -9,18 +8,6 @@
  * Test that a view only appears in the webform select list if it is enabled.
  */
 class WebformViewsSelectViewEnabledTestCase extends DrupalWebTestCase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Enabled View test',
-      'description' => 'Test that only enabled views are used',
-      'group' => 'Webform Views Select',
-      'dependencies' => array('webform', 'views'),
-    );
-  }
 
   /**
    * {@inheritdoc}

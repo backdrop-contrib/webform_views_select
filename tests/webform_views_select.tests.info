@@ -1,0 +1,5 @@
+[WebformViewsSelectViewEnabledTestCase]
+name = Enabled View test
+description = Test that only enabled views are used.
+group = Webform Views Select
+file = webform_views_select.test

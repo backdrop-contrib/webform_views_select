@@ -6,5 +6,3 @@ backdrop = 1.x
 
 dependencies[] = views
 dependencies[] = webform
-
-files[] = tests/webform_views_select.test
