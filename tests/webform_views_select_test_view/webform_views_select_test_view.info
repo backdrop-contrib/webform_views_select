@@ -6,5 +6,4 @@ backdrop = 1.x
 dependencies[] = views
 dependencies[] = webform
 dependencies[] = webform_views_select
-
-hhidden = TRUE
+hidden = TRUE
