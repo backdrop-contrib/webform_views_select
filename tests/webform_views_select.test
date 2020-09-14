@@ -17,23 +17,35 @@ class WebformViewsSelectViewEnabledTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Test that a enabled view is listed as an options source.
-   */
-  public function testEnabledView() {
-    $items = webform_views_select_webform_select_options_info();
-    $message = 'Enabled view is listed in the select options info.';
-    $this->assertTrue(isset($items['webform_views_select_test_view-webform_select_1']), $message);
-  }
-
-  /**
    * Test that a disabled view is not listed as an options source.
    */
   public function testDisabledView() {
-    // Disable the view.
-    config_set('views.view.webform_views_select_test_view', 'disabled', array(FALSE));
+    // Confirm the view exists and is disabled.
+    $view = views_get_view('webform_views_select_test_view');
+    $message = 'Webform options view exists and is disabled.';
+    $this->assertTrue(views_view_is_disabled($view), $message);
+
+    // Confirm the view exists and is disabled, again.
+    $disabled_views = views_get_disabled_views();
+    $this->assertTrue(array_key_exists('webform_views_select_test_view', $disabled_views), $message);
 
     $items = webform_views_select_webform_select_options_info();
     $message = 'Disabled view is not listed in the select options info.';
     $this->assertFalse(isset($items['webform_views_select_test_view-webform_select_1']), $message);
+
+    // Enable the view.
+    $view->disabled = FALSE;
+    $view->save();
+    // Clear views cache.
+    cache('views')->flush();
+
+    // Confirm the view the view exists and is enabled.
+    $view = views_get_view('webform_views_select_test_view');
+    $message = 'Webform options view view exists and is enabled.';
+    $this->assertTrue(views_view_is_enabled($view), $message);
+
+    $items = webform_views_select_webform_select_options_info();
+    $message = 'Enabled view is listed in the select options info.';
+    $this->assertTrue(isset($items['webform_views_select_test_view-webform_select_1']), $message);
   }
 }

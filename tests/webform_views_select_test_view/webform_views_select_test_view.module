@@ -5,6 +5,21 @@
  */
 
 /**
+ * Implements hook_config_info().
+ */
+function webform_views_select_test_view_config_info() {
+  // If this configuration file points to one particular file, a "name" key
+  // will display that exact string for that file.
+  $prefixes['views.view.webform_views_select_test_view'] = array(
+    'label' => t('Webform options test View'),
+    'group' => t('Views'),
+  );
+
+  return $prefixes;
+}
+
+
+/**
  * Implements hook_views_api().
  */
 function webform_views_select_test_view_views_api() {
